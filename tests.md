@@ -16,19 +16,19 @@ lsblk
 
 **User checks**
 
-<input type="checkbox" /> Check for the user presence
+- [ ] Check for the user presence
 ```bash
 cat /etc/passwd | awk -F":"'{print $1}'
 ```
 *Find user with login in intra-42 system (user).*
 
-<input type="checkbox" /> The user has groups "sudo", "user42"
+- [ ] The user has groups "sudo", "user42"
 ```bash
 groups
 ```
 *Should be sudo and user42 in the list.*
 
-<input type="checkbox" /> User policy
+- [ ] User policy
 ```bash
 nano /etc/sudoers #(sudo visudo)
 #Should be
@@ -47,7 +47,7 @@ sudo ls  # try entering the wrong password 3 times
 sudo tail /var/log/sudo/sudo.log
 ```
 
-<input type="checkbox" /> Hostname
+- [ ] Hostname
 ```bash
 nano /etc/hostname
 nano /etc/hosts
@@ -58,7 +58,7 @@ nano /etc/hosts
 
 **SSH checks**
 
-<input type="checkbox" /> SSH config
+- [ ] SSH config
 ```bash
 nano /etc/ssh/sshd_config
 #Should be in the file
@@ -67,7 +67,7 @@ PermitRootLogin no
 PasswordAuthentication yes
 ```
 
-<input type="checkbox" /> Connect
+- [ ] Connect
 ```bash
 ssh <user>@localhost -p 4242
 ```
@@ -76,7 +76,7 @@ ssh <user>@localhost -p 4242
 
 **UFW**
 
-<input type="checkbox" /> Firewall
+- [ ] Firewall
 ```bash
 sudo ufw status
 #Should be
@@ -88,7 +88,7 @@ sudo ufw status
 
 **Security modules for the Linux kernel**
 
-<input type="checkbox" /> AppArmor
+- [ ] AppArmor
 ```bash
 sudo aa-status
 nano file /etc/default/grub
@@ -100,7 +100,7 @@ GRUB_CMDLINE_LINUX="apparmor=1 security=apparmor"
 
 **Password policy**
 
-<input type="checkbox" /> Password policy
+- [ ] Password policy
 
 ```bash
 #for existing users
@@ -115,7 +115,7 @@ PASS_WARN_AGE 7
 
 **PAM - pluggable authentication module**
 
-<input type="checkbox" /> libpam-pwquality file pwquality.conf
+- [ ] libpam-pwquality file pwquality.conf
 
 ```bash
 passpwd <username>
@@ -131,7 +131,7 @@ usercheck = 1
 enforce_for_root
 ```
 
-<input type="checkbox" /> libpam-pwquality file pam.d/common-password
+- [ ] libpam-pwquality file pam.d/common-password
 
 ```bash
 nano /etc/pam.d/common-password
@@ -144,4 +144,4 @@ password        required                        pam_permit.so
 
 **Script monitoring.sh**
 
-<input type="checkbox" /> Cron
+- [ ] Cron
