@@ -5,7 +5,8 @@ https://www.w3schools.com/bash/index.php
 
 **Encrypted partitions using LVM**
 
-- [] LVM
+- [ ] LVM
+
 ```bash
 lsblk
 ```
