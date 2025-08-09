@@ -5,7 +5,7 @@ https://www.w3schools.com/bash/index.php
 
 **Encrypted partitions using LVM**
 
-<input type="checkbox" /> LVM
+- [] LVM
 ```bash
 lsblk
 ```
@@ -100,6 +100,7 @@ GRUB_CMDLINE_LINUX="apparmor=1 security=apparmor"
 **Password policy**
 
 <input type="checkbox" /> Password policy
+
 ```bash
 #for existing users
 sudo chage -M 30 -m 2 -W 7 <user>
@@ -113,15 +114,33 @@ PASS_WARN_AGE 7
 
 **PAM - pluggable authentication module**
 
-<input type="checkbox" /> libpam-pwquality
+<input type="checkbox" /> libpam-pwquality file pwquality.conf
+
 ```bash
+passpwd <username>
 nano /etc/security/pwquality.conf
 #Sould be
 minlen = 10
 dcredit = -1
 ucredit = -1
 lcredit = -1
+minclass = 3
 maxrepear = 3
 usercheck = 1
-difok = 7
+enforce_for_root
 ```
+
+<input type="checkbox" /> libpam-pwquality file pam.d/common-password
+
+```bash
+nano /etc/pam.d/common-password
+#Should be
+password        requisite                       pam_pwquality.so retry=3 difok=7
+password        [success=1 default=ignore]      pam_unix.so obscure use_authtok try_first_pass yescrypt
+password        requisite                       pam_deny.so
+password        required                        pam_permit.so
+```
+
+**Script monitoring.sh**
+
+<input type="checkbox" /> Cron
