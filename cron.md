@@ -8,8 +8,8 @@ System ctontab is in the file **/etc/crontab**
 ```bash
 # добавляем скрипт в расписание
 $crontab -e
-*/10 * * * *	sh /home/<user>/monitoring.sh
-
+10 * * * *	sh /home/<user>/monitoring.sh
+#
   * * * * * <command to execute>
 # | | | | |
 # | | | | day of the week (0–6) (Sunday to Saturday;
@@ -17,7 +17,6 @@ $crontab -e
 # | | day of the month (1–31)
 # | hour (0–23)
 # minute (0–59)
-
 ```
 
 
@@ -52,20 +51,20 @@ PHYSICAL_CPUS=$(lscpu | grep "Socket(s):" | awk '{print $2}')
 VIRTUAL_CPUS=$(lscpu | grep "^CPU(s):" | awk '{print $2}')
 
 # 4. free -m shows memory usage in MB
-RAM_TOTAL=$(free -m | awk '/Mem:/ {print $2}')
-RAM_USED=$(free -m | awk '/Mem:/ {print $3}')
-RAM_PERCENT=$(( RAM_USED * 100 / RAM_TOTAL ))
+RAM_TOTAL=$(free -m | grep "Mem:" | awk '{print $2}')
+RAM_USED=$(free -m | grep "Mem:" | awk '{print $3}')
+RAM_PERCENT=$(awk "BEGIN {printf \"%.2f\", $RAM_USED * 100 / $RAM_TOTAL}")
 
 # 5. df -BG gives a total view of all mounted disks in GB
 DISK_TOTAL=$(df -BG | grep '^/dev/' | grep -v 'boot$' | awk '{disk_t += $2} END {print disk_t}')
 DISK_USED=$(df -BM | grep '^/dev/' | grep -v 'boot$' | awk '{disk_u += $3} END {print disk_u}')
-DISK_PERCENT=$(( DISK_USED * 100 / (DISK_TOTAL * 1024) ))
+DISK_PERCENT=$((DISK_USED * 100 / (DISK_TOTAL * 1024)))
 
-# 6. top -bn1 runs top non-interactively. The idle percentage is $8, so subtract from 100.
-CPU_LOAD=$(mpstat 1 1 | awk '/^Average:/ || /^[0-9]/ {print 100 - $12}' | tail -n 1)
+# 6. top -bn1 runs top non-interactively. The idle percentage is <result>, so subtract from 100.
+CPU_LOAD=$(top -bn1 | grep '^%Cpu' | cut -c 9- | xargs | awk '{printf("%.1f%%"), $1 + $3}')
 
-# 7. Shows last system boot time.
-LAST_BOOT=$(who -b | awk '{print $3 " " $4}')
+# 7. Shows last system reboot time.
+LAST_REBOOT=$(uptime -s)
 
 # 8. If lsblk shows "lvm", then LVM is used.
 LVM_USE=$(lsblk | grep -q "lvm" && echo yes || echo no)
@@ -78,7 +77,7 @@ USER_LOG=$(who | wc -l)
 
 # 11. Get the first IPv4 address and MAC address.
 IP=$(hostname -I | awk '{print $1}')
-MAC=$(ip link show | awk '/ether/ {print $2}' | head -n 1)
+MAC=$(ip link show | awk '/ether/ {print $2}')
 
 # 12. Count how many times sudo has been used
 SUDO_CMD=$(journalctl _COMM=sudo 2>/dev/null | grep COMMAND | wc -l)
@@ -87,10 +86,10 @@ MESSAGE=$(cat <<EOF
 #Architecture: $ARCH
 #CPU physical : $PHYSICAL_CPUS
 #vCPU : $VIRTUAL_CPUS
-#Memory Usage: $RAM_USED/${RAM_TOTAL}MB (${RAM_PERCENT}%)
-#Disk Usage: $DISK_USED/${DISK_TOTAL}Gb ({$DISK_PERCENT}%)
+#Memory Usage: $RAM_USED/${RAM_TOTAL}Mb (${RAM_PERCENT}%)
+#Disk Usage: $DISK_USED/${DISK_TOTAL}Gb (${DISK_PERCENT}%)
 #CPU load: ${CPU_LOAD}%
-#Last boot: $LAST_BOOT
+#Last boot: $LAST_REBOOT
 #LVM use: $LVM_USE
 #Connections TCP: ${TCP_CONN} ESTABLISHED
 #User log: $USER_LOG

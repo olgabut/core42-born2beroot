@@ -1,5 +1,6 @@
 # Documentation
 https://www.w3schools.com/bash/index.php
+https://linux.die.net/man/5/
 
 # How to check if the settings are done
 
@@ -18,13 +19,13 @@ lsblk
 
 - [ ] Check for the user presence
 ```bash
-cat /etc/passwd | awk -F":"'{print $1}'
+cat /etc/passwd | awk -F":" '{print $1}'
 ```
 *Find user with login in intra-42 system (user).*
 
 - [ ] The user has groups "sudo", "user42"
 ```bash
-groups
+groups <user>
 ```
 *Should be sudo and user42 in the list.*
 
@@ -60,11 +61,11 @@ nano /etc/hosts
 
 - [ ] SSH config
 ```bash
+sudo systemctl status ssh
 nano /etc/ssh/sshd_config
 #Should be in the file
 Port 4242
 PermitRootLogin no
-PasswordAuthentication yes
 ```
 
 - [ ] Connect
@@ -79,6 +80,7 @@ ssh <user>@localhost -p 4242
 - [ ] Firewall
 ```bash
 sudo ufw status
+sudo systemctl status ufw
 #Should be
 4242 ALLOW
 4242 (v6) ALLOW
@@ -91,6 +93,7 @@ sudo ufw status
 - [ ] AppArmor
 ```bash
 sudo aa-status
+sudo systemctl status apparmor
 nano file /etc/default/grub
 #Should be
 GRUB_CMDLINE_LINUX="apparmor=1 security=apparmor"
@@ -145,3 +148,8 @@ password        required                        pam_permit.so
 **Script monitoring.sh**
 
 - [ ] Cron
+
+```bash
+nano /usr/local/bin/monitoring.sh
+sudo crontab -l
+```
