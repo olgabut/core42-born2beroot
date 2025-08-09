@@ -3,7 +3,7 @@
 It provides tools for managing software packages, including installing, removing, updating, and querying information about them.
 
 # Aptitude
-**Aptitude** is a package manager for Debian-based systems. It is a front-end to dpkg and apt, offering both:
+**Aptitude** is a front end "pseudo graphical interface" to APT.
 - a command-line interface (CLI), and
 - a text-based user interface (TUI)
 

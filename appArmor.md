@@ -46,12 +46,12 @@ sudo aa-status
 ```
 
 Result
-```JavaScript
+```bash
 apparmor module is loaded.
 45 profiles are loaded.
-5 profiles are in enforce mode. //Профили в enforce режиме активно ограничивают работу программ.
-40 profiles are in complain mode. //Режим обучения: пишет предупреждения
-2 processes have profiles defined. // Сколько работающих программ (процессов) сейчас используют AppArmor.
+5 profiles are in enforce mode. #Профили в enforce режиме активно ограничивают работу программ.
+40 profiles are in complain mode. #Режим обучения: пишет предупреждения
+2 processes have profiles defined. #Сколько работающих программ (процессов) сейчас используют AppArmor.
 1 processes are in enforce mode.
 1 processes are in complain mode.
 ```
@@ -69,9 +69,9 @@ sudo update-grub
 ```
 
 ### Active profile
-```JavaScript
+```bash
 sudo aa-status | grep sshd
-sudo aa-enforce /etc/apparmor.d/usr.sbin.sshd // Включает защиту профиля
-sudo aa-disable <профиль> // Выключает защиту профиля
-sudo aa-complain <профиль> // Только пишет предупреждения
+sudo aa-enforce /etc/apparmor.d/usr.sbin.sshd # Включает защиту профиля
+sudo aa-disable <профиль> # Выключает защиту профиля
+sudo aa-complain <профиль> # Только пишет предупреждения
 ```

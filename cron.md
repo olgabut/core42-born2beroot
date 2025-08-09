@@ -6,6 +6,10 @@ also known as cron jobs, to run periodically at fixed times, dates, or intervals
 System ctontab is in the file **/etc/crontab**
 
 ```bash
+# добавляем скрипт в расписание
+$crontab -e
+*/10 * * * *	sh /home/<user>/monitoring.sh
+
   * * * * * <command to execute>
 # | | | | |
 # | | | | day of the week (0–6) (Sunday to Saturday;
@@ -15,7 +19,6 @@ System ctontab is in the file **/etc/crontab**
 # minute (0–59)
 
 ```
-
 
 
 Create script file

@@ -21,7 +21,7 @@ sudo visudo
 ```
 
 Change file
-```Java
+```bash
 USERHOST = (RUN-AS-USER : RUN-AS-GROUP) COMMANDS
 Defaults  passwd_tries=3
 Defaults  badpass_message="Ah jo! Password is wrong! Please try again. "
@@ -30,12 +30,12 @@ Defaults  logfile="/var/log/sudo/sudo.log"
 Defaults  log_input, log_output
 Defaults  iolog_dir="/var/log/sudo"
 
-Defaults  requiretty //TTY (Teletypewriter)
+Defaults  requiretty #TTY (Teletypewriter)
 
 Defaults  secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
 ```
 
-```Java
-sudo mkdir -p /var/log/sudo // create folder
-sudo touch /var/log/sudo/sudo.log  //create file
+```bash
+sudo mkdir -p /var/log/sudo # create folder
+sudo touch /var/log/sudo/sudo.log # create file
 ```
