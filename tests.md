@@ -131,6 +131,7 @@ lcredit = -1
 minclass = 3
 maxrepear = 3
 usercheck = 1
+difok = 7
 enforce_for_root
 ```
 
