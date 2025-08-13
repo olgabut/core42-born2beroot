@@ -94,7 +94,7 @@ sudo systemctl status ufw
 ```bash
 sudo aa-status
 sudo systemctl status apparmor
-nano file /etc/default/grub
+nano /etc/default/grub
 #Should be
 GRUB_CMDLINE_LINUX="apparmor=1 security=apparmor"
 ```
@@ -108,6 +108,7 @@ GRUB_CMDLINE_LINUX="apparmor=1 security=apparmor"
 ```bash
 #for existing users
 sudo chage -M 30 -m 2 -W 7 <user>
+sudo chage -l <user>
 #for new users
 nano /etc/login.defs
 #Should by

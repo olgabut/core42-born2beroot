@@ -8,7 +8,7 @@ System ctontab is in the file **/etc/crontab**
 ```bash
 # добавляем скрипт в расписание
 $crontab -e
-10 * * * *	sh /home/<user>/monitoring.sh
+10 * * * *	sh /usr/local/bin/monitoring.sh
 #
   * * * * * <command to execute>
 # | | | | |

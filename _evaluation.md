@@ -1,4 +1,4 @@
-bbbbrbbbr
+
 **Preliminary tests**
 The defense can only occur if the student or group being evaluated is present. This way everybody learns by sharing knowledge with each other.
 If no work has been submitted (or wrong files, wrong directory, or wrong filenames), the grade is 0, and the evaluation process ends.
@@ -171,7 +171,7 @@ Controls incoming and outgoing network traffic by allowing or denying connection
 Lets you open or close ports (like SSH on port 22, HTTP on port 80) with simple commands.
 Helps protect your system from unauthorized access and network attacks.
 
-- List the active rules in UFW (or Firewalld). A rule must exist for port 4242.
+- List the active rules in UFW (or Firewall). A rule must exist for port 4242.
 
 ```bash
 sudo ufw status numbered
@@ -181,7 +181,7 @@ sudo ufw status numbered
 
 ```bash
 sudo ufw allow 8080
-sudo ufw status verbose
+sudo ufw status
 sudo ufw delete allow 8080
 sudo ufw status numbered
 sudo ufw delete 2
